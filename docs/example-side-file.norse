@@ -1,0 +1,7 @@
+# NorseCoSave side file for NorseCoSaveTest.sav - written 2026-11-17 21:37:11. Per-mod data; the game never reads it.
+[NorseCoSave]
+Format=1
+
+[Test]
+Color=red
+Note=hello world

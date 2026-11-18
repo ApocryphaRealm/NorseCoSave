@@ -1,0 +1,7 @@
+Reason: NorseCoSave 0.1.0 wrote its side file beside a real game save and read it back on load; the stored value survived a change and a load.
+Batch B-20261117-213505-86c3, 2026-11-17 21:35-21:38 (Main Agent). One launch.
+- Start: NAL IDs 7-9 (USpudSubsystem SaveGame / LoadGame / NewGame) from this build's table, bytes verified; three hooks installed. Side-file folder C:\Users\<user>\AppData\Local\Norse\Saved\SaveGames.
+- CombatTestMap: ncs.set Test Color red, ncs.set Test Note hello world; LoadSaveSubsystem:SaveGame("NorseCoSaveTest") (the game's own save path, ending in SPUD): NorseCoSaveTest.sav (444,801 bytes) and NorseCoSaveTest.norse (176 bytes) written in the same second; the side file holds [Test] Color=red, Note=hello world (docs/example-side-file.norse). NorseEvents: GameSaving.
+- ncs.set Test Color blue (ncs.get: blue); LoadSaveSubsystem:LoadGame("NorseCoSaveTest", true): "load 'NorseCoSaveTest': 2 value(s) from 1 mod(s)"; GameLoaded published; after the reload ncs.get Test Color = red, ncs.dump shows both values.
+- Not exercised: an autosave (none happened this run), NewGame, a save with nothing stored (removes any stale side file), NCS_Set / NCS_Get from another mod (no consumer yet).
+- The test save and its side file were deleted afterwards.
