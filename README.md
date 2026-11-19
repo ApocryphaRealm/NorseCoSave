@@ -29,3 +29,7 @@ The side file is plain text, one `[section]` per mod (`docs/example-side-file.no
 read back on load, and the stored value survived a change and a load. Not yet exercised: autosaves, NewGame, and a mod
 calling the API. Build: `xmake f -p windows -a x64 -m release --toolchain=msvc -y`, then `xmake` (needs
 `../NorsePatcher`, `../NorseAddressLibrary` and `../NorseEvents` beside it; MinHook in `third_party/`).
+
+## Licence
+
+GPL-3.0-or-later (see LICENSE). MinHook (BSD 2-Clause), compiled into the DLL, keeps its own notice in THIRD-PARTY-NOTICES.txt.
