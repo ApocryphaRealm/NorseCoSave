@@ -325,12 +325,14 @@ class NorseCoSave : public RC::CppUserModBase
         g_mod = ModDir();
         g_saveDir = SaveDir();
         std::wstring dir;
+        int logLevel = 2; // uLogLevel: 0 trace, 1 debug, 2 info, 3 warn, 4 error, 6 off
         {
             std::ifstream in(g_mod / "NorseCoSave.ini");
             std::string line;
             while (std::getline(in, line))
             {
                 if (!line.empty() && line.back() == '\r') line.pop_back();
+                if (line.rfind("uLogLevel=", 0) == 0) logLevel = atoi(line.c_str() + 10);
                 if (line.rfind("sLogDir=", 0) == 0)
                 {
                     int n = MultiByteToWideChar(CP_UTF8, 0, line.c_str() + 8, -1, nullptr, 0);
@@ -339,8 +341,8 @@ class NorseCoSave : public RC::CppUserModBase
                 }
             }
         }
-        Log::Get().Open((dir.empty() ? g_mod : fs::path(dir)) / "NorseCoSave.log", 2);
-        Log::Get().Write(Level::Error, "NorseCoSave v%s - side files in %s", NCS_VERSION, Narrow(g_saveDir.wstring()).c_str());
+        Log::Get().Open((dir.empty() ? g_mod : fs::path(dir)) / "NorseCoSave.log", logLevel);
+        Log::Get().Write(Level::Error, "NorseCoSave v%s - log level %d - side files in %s", NCS_VERSION, logLevel, Narrow(g_saveDir.wstring()).c_str());
     }
 
     auto on_unreal_init() -> void override
